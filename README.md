@@ -1,4 +1,4 @@
-OpenVPN for Kodi
+OpenVPN for Kodi (on OSMC)
 ==========
 A script that allows you to control OpenVPN from within Kodi.
 
