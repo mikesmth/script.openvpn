@@ -15,7 +15,7 @@ Screenshots
 
 Installation
 ------
-Download [the latest zip](https://github.com/brianhornsby/script.openvpn/releases/download/v2.1.0/script.openvpn-2.1.0.zip) file and install the addon. See [http://kodi.wiki/view/HOW-TO:Install_an_Add-on_from_a_zip_file][1] for more details on installing addons from zip file.
+Download [the latest zip](https://github.com/mikesmth/script.openvpn/archive/v3.0.1.zip) file and install the addon. See [http://kodi.wiki/view/HOW-TO:Install_an_Add-on_from_a_zip_file][1] for more details on installing addons from zip file.
 
 </BR>On OSMC you'll need to 
 install beautifulsoup..
@@ -65,6 +65,11 @@ sudo openvpn configfile.ovpn
 ```
 Now the keyboard will popup and ask for the root password. 
 
+If you need to store your password do this
+```code
+echo yourosmcpwd>>~/.kodi/userdata/addon_data/script.openvpn/pass
+```
+Now it won't ask for a password.
 
 Usage
 ------
