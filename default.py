@@ -131,7 +131,15 @@ def disconnect_openvpn():
 def connect_openvpn(config, restart=False, sudopassword=None):
     log_debug('Connecting OpenVPN configuration: [%s]' % config)
     global _state
+    
+    pass_file="{0}/pass".format(_userdata);
 
+    display_notification(pass_file)
+
+    if os.path.isfile(pass_file):
+        txt=open(pass_file)
+        sudopassword=txt.read()
+        
     if _sudo and _sudopwdrequired and sudopassword is None:
         sudopassword = utils.keyboard(
             heading=_settings.get_string(3012), hidden=True)
