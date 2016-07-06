@@ -17,6 +17,55 @@ Installation
 ------
 Download the latest zip file and install the addon. See [http://kodi.wiki/view/HOW-TO:Install_an_Add-on_from_a_zip_file][1] for more details on installing addons from zip file.
 
+</BR>On OSMC you'll need to 
+install beautifulsoup..
+```code
+sudo apt-get install python-beautifulsoup
+```
+and edit the configuration...
+```code
+nano ~/.kodi/addons/script.openvpn/resources/settings.xml
+```
+Change the openvpn setting from /usr/bin/openvpn to /usr/sbin/openvpn.
+
+```xml
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+        <category label="2000">
+                <setting label="2007" type="lsep"/>
+                <setting label="2001" type="action" action="RunScript(script.openvpn, import)"/>
+                <setting label="2002" type="action" action="RunScript(script.openvpn, delete)"/>
+                <setting label="2003" type="lsep"/>
+                <setting id="openvpn" type="file" label="2000" default="/usr/sbin/openvpn"/>
+                <setting id="ip" type="ipaddress" label="2004" default="127.0.0.1"/>
+                <setting id="port" type="number" label="2005" default="1337"/>
+                <setting id="args" type="text" label="2006" default=""/>
+        </category>
+        <category label="2010">
+                <setting id="sudo" type="bool" label="2011" default="false"/>
+                <setting id="sudopwdrequired" type="bool" label="2012" default="true" enable="!eq(-1,false)"/>
+        </category>
+        <category label="2020">
+                <setting id="debug" type="bool" label="2021" default="false"/>
+        </category>
+</settings>
+```
+You can test your connection first on the commandline like so:
+```code
+openvpn configfile.ovpn
+```
+In my case this did not work due to root privileges being needed.
+Instead:
+```code
+sudo openvpn configfile.ovpn
+```
+...did work. So then we need to change the settings.xml to enable root privs...
+```
+<setting id="sudo" type="bool" label="2011" default="true"/>
+```
+Now the keyboard will popup and ask for the root password. 
+
+
 Usage
 ------
 The SimilarTracks script can be accessed from the Programs menu or called using the RunScript builtin function (RunScript(script.openvpn)). The script can be passed the following arguments; e.g. RunScript(script.openvpn, Los Angeles).
